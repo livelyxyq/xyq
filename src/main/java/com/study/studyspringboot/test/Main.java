@@ -19,8 +19,18 @@ public class Main {
     Pattern pattern = Pattern.compile("规则");
 
     public static void main(String[] args) {
-        System.out.println("I am monkey");
-        test7();
+        test8();
+    }
+
+    public static void test8() {
+        int a = 2;
+        int b = 2;
+
+        if (a == b) {
+            System.out.println("a==b");
+        } else if (a < b) {
+            System.out.println("a < b");
+        }
     }
 
     public static void test7() {
