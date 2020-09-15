@@ -12,6 +12,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 /**
  * 说明：
@@ -60,7 +61,7 @@ public class RequestLogAspect {
             Object result = joinPoint.proceed();
 
             // 拼接响应数据信息，若长度大于RESPONSE_MAX_LENGTH，则提示“请求成功”
-            if (result.toString().length() > RESPONSE_MAX_LENGTH) {
+            if (Objects.nonNull(result) && result.toString().length() > RESPONSE_MAX_LENGTH) {
                 logBuilder.append("请求成功！响应数据过长，不显示。");
             } else {
                 logBuilder.append("请求成功！响应数据 = ").append(result).append("。");
