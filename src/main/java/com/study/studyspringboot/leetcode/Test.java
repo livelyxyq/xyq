@@ -32,6 +32,16 @@ public class Test {
     }
 
     /**
+     * 最长公共前缀-开始
+     */
+    public static String longestCommonPrefix() {
+
+        return "";
+    }
+
+    // 最长公共前缀-结束
+
+    /**
      * 回文数开始
      *
      * @param x
