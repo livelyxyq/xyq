@@ -1,7 +1,7 @@
 package com.study.studyspringboot.controller;
 
 import com.study.studyspringboot.service.MyUserService;
-import com.study.studyspringboot.vo.UserAddReq;
+import com.study.studyspringboot.vo.req.UserAddReq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindException;
