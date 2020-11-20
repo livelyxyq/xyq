@@ -1,5 +1,6 @@
 package com.study.studyspringboot.vo.req;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.validation.Valid;
@@ -15,7 +16,8 @@ import javax.validation.constraints.NotNull;
 @Data
 public class UserAddReq {
 
-    @NotNull(message = "年龄不能为空a")
+    @NotNull(message = "年龄不能为空")
+    @JsonProperty("_age")
     private Integer age;
 
     @NotBlank(message = "姓名不能为空")
