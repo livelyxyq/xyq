@@ -16,16 +16,110 @@ public class Test {
     private String aa;
 
     public static void main(String[] args) {
-        // ()[]{} ([{}])
-        String s = "";
-        System.out.println("result=" + isValid(s));
+        //int[] nums = {3, 1, 2, 4, 0, 9, 35, 21, 4, 2, 5, 10};
+        int[] nums = {-1, -2, -3, -4};
+        // -4 -3 -2 -1
+        int sum = maximumProduct3(nums);
+        System.out.println(sum);
+    }
+
+    public static int maximumProduct3(int[] nums) {
+        int min1 = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE;
+        int max1 = Integer.MIN_VALUE, max2 = Integer.MIN_VALUE, max3 = Integer.MIN_VALUE;
+
+        for (int x : nums) {
+            if (x < min1) {
+                min2 = min1;
+                min1 = x;
+            } else if (x < min2) {
+                min2 = x;
+            }
+
+            if (x > max1) {
+                max3 = max2;
+                max2 = max1;
+                max1 = x;
+            } else if (x > max2) {
+                max3 = max2;
+                max2 = x;
+            } else if (x > max3) {
+                max3 = x;
+            }
+        }
+
+        return Math.max(min1 * min2 * max1, max2 * max3 * max1);
+    }
+
+    public static int maximumProduct(int[] nums) {
+
+        Arrays.sort(nums);
+
+        int len = nums.length;
+
+        int max = Math.max(nums[0] * nums[1], nums[len - 2] * nums[len - 3]);
+
+        return max * nums[len - 1];
+    }
+
+    // 试一下冒泡排序
+    private static void sort(int nums[]) {
+        int temp;
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = 0; j < nums.length - 1 - i; j++) {
+                if (nums[j] > nums[j + 1]) {
+                    temp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    // 青蛙跳台阶
+    public static int numWays(int n) {
+
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+
+        int a = 1;
+        int b = 1;
+        int sum = 0;
+        for (int i = 2; i <= n; i++) {
+            sum = (a + b) % 1000000007;
+            a = b;
+            b = sum;
+        }
+        return sum;
+    }
+
+    // 斐波那契数列
+    public static int fib(int n) {
+
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+
+        int a = 0;
+        int b = 1;
+        int sum = 0;
+        for (int i = 2; i <= n; i++) {
+            sum = (a + b) % 1000000007;
+            a = b;
+            b = sum;
+        }
+
+        return sum;
     }
 
     /**
      * 合并两个有序列表开始
      */
     //     Definition for singly-linked list.
-    class ListNode {
+    static class ListNode {
         int val;
         ListNode next;
 
@@ -52,28 +146,13 @@ public class Test {
             return l1;
         }
 
-        ListNode nowNode1 = l1;
-        ListNode nowNode2 = l2;
-
-        ListNode headNode1 = l1;
-        ListNode headNode2 = l2;
-
-        while (nowNode1 != null && nowNode2 != null) {
-
-            if (nowNode1.val < nowNode2.val) {
-
-                if (nowNode1.next.val >= nowNode2.val) {
-                    headNode1 = nowNode1.next;
-
-                    nowNode1.next = headNode2;
-                } else {
-
-                }
-            }
+        if (l1.val <= l2.val) {
+            l1.next = mergeTwoLists(l1.next, l2);
+            return l1;
+        } else {
+            l2.next = mergeTwoLists(l1, l2.next);
+            return l2;
         }
-
-        // todo 暂时这样
-        return null;
     }
 
     /**

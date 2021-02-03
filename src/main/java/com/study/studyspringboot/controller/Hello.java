@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -21,6 +22,11 @@ public class Hello {
 
     private AsyncService asyncService;
     private SettingProperties settingProperties;
+
+    @PostConstruct
+    public void init() {
+        log.info("我执行了init()方法。");
+    }
 
     @RequestMapping("/")
     public String submit() {
