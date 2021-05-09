@@ -14,4 +14,8 @@ public class MyUserService {
         System.out.println("I am test");
     }
 
+    public void testPushToErrorBranch() {
+        System.out.printf("测试推送代码到错误的分支。");
+    }
+
 }
