@@ -16,11 +16,146 @@ public class Test {
     private String aa;
 
     public static void main(String[] args) {
-        //int[] nums = {3, 1, 2, 4, 0, 9, 35, 21, 4, 2, 5, 10};
-        int[] nums = {-1, -2, -3, -4};
-        // -4 -3 -2 -1
-        int sum = maximumProduct3(nums);
-        System.out.println(sum);
+       // [[1,1,0],[1,0,1],[1,0,1]]
+        int [][] A = {{1,1,0}, {1,0,1}, {1,0,1}};
+        flipAndInvertImage(A);
+    }
+
+    public static int[][] flipAndInvertImage(int[][] A) {
+        int len = A.length;
+
+        for(int i = 0;i < len; i++) {
+            int p = 0;
+            int q = len-1;
+
+            while(p < len && q >= 0) {
+
+                int temp = A[i][p] ^ 1;
+                A[i][p] = A[i][q] ^ 1;
+                A[i][q] = temp;
+
+                if((p+1) >= q) {
+                    break;
+                }
+                p ++;
+                q --;
+            }
+        }
+
+        return A;
+    }
+
+    public static boolean canPlaceFlowers(int[] flowerbed, int n) {
+        int count = 0;
+        int len = flowerbed.length;
+        if (len == 1 && n == 1 && flowerbed[0] == 0) {
+            return true;
+        }
+        if ((len / 2) < n) {
+            return false;
+        }
+        int i = 0;
+        while (i < len - 1) {
+            if (flowerbed[i] == 0 && flowerbed[i + 1] == 0 && ((i == 0) || flowerbed[i - 1] == 0 || (i + 2) == len)) {
+                count++;
+                i += 2;
+            } else {
+                i++;
+            }
+        }
+        return count >= n;
+    }
+
+    public static List<String> summaryRanges(int[] nums) {
+        List<String> list = new ArrayList<>();
+        int i = 0;
+        int j;
+        int n = nums.length;
+        while (i < n) {
+            j = i;
+            while (j < (n - 1) && (nums[j] + 1) == nums[j + 1]) {
+                j++;
+            }
+
+            StringBuilder s = new StringBuilder(Integer.toString(nums[i]));
+            if (j > i) {
+                s.append("->").append(nums[j]);
+            }
+            list.add(s.toString());
+            i = j + 1;
+        }
+
+        return list;
+    }
+
+    public static List<String> summaryRanges2(int[] nums) {
+        List<String> ret = new ArrayList<>();
+        int i = 0;
+        int n = nums.length;
+        while (i < n) {
+            int low = i;
+            i++;
+            while (i < n && nums[i] == nums[i - 1] + 1) {
+                i++;
+            }
+            int high = i - 1;
+            StringBuilder temp = new StringBuilder(Integer.toString(nums[low]));
+            if (low < high) {
+                temp.append("->");
+                temp.append(nums[high]);
+            }
+            ret.add(temp.toString());
+        }
+        return ret;
+    }
+
+    public static int[][] transpose(int[][] A) {
+        if (A.length < 1) {
+            return A;
+        }
+        int[] a = A[0];
+        int len = a.length;
+
+        int[][] B = new int[len][A.length];
+
+        for (int i = 0; i < B.length; i++) {
+            for (int j = 0; j < A.length; j++) {
+                B[i][j] = A[j][i];
+            }
+        }
+        return B;
+    }
+
+    public static boolean containsNearbyDuplicate(int[] nums, int k) {
+        if (nums.length <= k) {
+            return false;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] == nums[j] && (j - i) <= k) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean threeConsecutiveOdds(int[] arr) {
+        if (arr.length < 3) {
+            return false;
+        }
+        int count = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 != 0) {
+                count++;
+            } else {
+                count = 0;
+            }
+            if (count >= 3) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static int maximumProduct3(int[] nums) {

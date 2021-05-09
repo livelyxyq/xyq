@@ -14,7 +14,4 @@ public class MyUserService {
         System.out.println("I am test");
     }
 
-    public MyUserService(){
-
-    }
 }
